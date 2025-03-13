@@ -1,9 +1,7 @@
 package io.github.konradb8.swift.swiftservice.model;
 
-
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.context.annotation.Primary;
 
 import java.util.Objects;
 
