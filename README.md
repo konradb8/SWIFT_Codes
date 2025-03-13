@@ -16,7 +16,7 @@ curl --form file='@csv.csv'  http://localhost:8080/v1/swift-codes/import-csv
 ```
 ## Available API Endpoints:
 ### Base URL:
-http://localhost:8080/v1/swift-codes/...
+http://localhost:8080/v1/swift-codes/
 
 | Method | Endpoint                                | Description                 |
 |--------|-----------------------------------------|-----------------------------|
