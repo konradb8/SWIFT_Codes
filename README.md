@@ -1,6 +1,6 @@
 # SWIFT_Codes application
 
-## How build and run:
+## How to build and run:
 #### Build a .jar:
 ```bash
 mvn clean package
