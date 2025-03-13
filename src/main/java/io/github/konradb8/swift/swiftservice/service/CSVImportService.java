@@ -42,10 +42,8 @@ public class CSVImportService {
             swiftCode.setCountryName(record.get("COUNTRY NAME"));
             swiftCode.setTimeZone(record.get("TIME ZONE"));
 
-
             swiftCodes.add(swiftCode);
         }
-
 
         swiftCodeRepository.saveAll(swiftCodes);
     }

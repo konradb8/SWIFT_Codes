@@ -3,7 +3,6 @@ package io.github.konradb8.swift.swiftservice.controller;
 import io.github.konradb8.swift.swiftservice.model.SwiftCodeRequest;
 import io.github.konradb8.swift.swiftservice.service.CSVImportService;
 import io.github.konradb8.swift.swiftservice.service.SwiftCodeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,6 @@ import java.util.Map;
 public class SwiftCodeController {
 
     private final SwiftCodeService swiftCodeService;
-
     private final CSVImportService csvImportService;
 
     public SwiftCodeController(SwiftCodeService swiftCodeService, CSVImportService csvImportService) {
@@ -74,4 +72,3 @@ public class SwiftCodeController {
         return errorResponse;
     }
 }
-

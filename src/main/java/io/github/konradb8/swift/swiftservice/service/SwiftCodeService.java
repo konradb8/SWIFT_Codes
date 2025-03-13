@@ -12,6 +12,8 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static io.github.konradb8.swift.swiftservice.utils.SwiftCodeUtils.isHeadquarter;
+
 @Service
 public class SwiftCodeService {
 
@@ -21,15 +23,11 @@ public class SwiftCodeService {
         this.swiftRepository = swiftRepository;
     }
 
-    public boolean isHeadquarter(String swiftCode) {
-        return swiftCode.endsWith("XXX");
-    }
-
     public SwiftCodeResponse getSwiftCodeDetails(String swiftCode) {
         SwiftCode entity = swiftRepository.findBySwiftCode(swiftCode)
                 .orElseThrow(() -> {
-                        System.out.println("SWIFT code nie znaleziony: " + swiftCode);
-                        return new ResponseStatusException(HttpStatus.NOT_FOUND, "SWIFT code not found");
+                    System.out.println("SWIFT code not found: " + swiftCode);
+                    return new ResponseStatusException(HttpStatus.NOT_FOUND, "SWIFT code not found");
                 });
         SwiftCodeResponse response = new SwiftCodeResponse(entity);
         response.setAddress(entity.getAddress());
@@ -73,7 +71,7 @@ public class SwiftCodeService {
 
         List<SwiftCodeShortResponse> swiftCodes = entities.stream()
                 .map(swiftCode -> {
-                    SwiftCodeShortResponse SwiftCodeShortResponse = new SwiftCodeShortResponse(entities.get(0));
+                    SwiftCodeShortResponse SwiftCodeShortResponse = new SwiftCodeShortResponse(entities.getFirst());
                     SwiftCodeShortResponse.setAddress(swiftCode.getAddress());
                     SwiftCodeShortResponse.setBankName(swiftCode.getName());
                     SwiftCodeShortResponse.setCountryISO2(swiftCode.getCountryISO2());
@@ -94,16 +92,16 @@ public class SwiftCodeService {
     }
 
     public SwiftCode addSwiftCode(SwiftCodeRequest request) {
-        SwiftCode swiftCode = new SwiftCode();
-        swiftCode.setSwiftCode(request.getSwiftCode());
-        swiftCode.setAddress(request.getAddress());
-        swiftCode.setName(request.getBankName());
-        swiftCode.setCountryISO2(request.getCountryISO2().toUpperCase());
-        swiftCode.setCountryName(request.getCountryName().toUpperCase());
-        swiftCode.setIsHeadquarter(isHeadquarter(request.getSwiftCode()));
+        SwiftCode Swift = new SwiftCode();
+        Swift.setSwiftCode(request.getSwiftCode());
+        Swift.setAddress(request.getAddress());
+        Swift.setName(request.getBankName());
+        Swift.setCountryISO2(request.getCountryISO2().toUpperCase());
+        Swift.setCountryName(request.getCountryName().toUpperCase());
+        Swift.setIsHeadquarter(isHeadquarter(request.getSwiftCode()));
 
-        swiftRepository.save(swiftCode);
-        return swiftCode;
+        swiftRepository.save(Swift);
+        return Swift;
     }
 
 }

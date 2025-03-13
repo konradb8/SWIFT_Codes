@@ -3,6 +3,9 @@ package io.github.konradb8.swift.swiftservice.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.context.annotation.Primary;
+
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -40,7 +43,7 @@ public class SwiftCode {
     @Column(name = "TIME ZONE")
     private String timeZone;
 
-    @Column(name = "IS HEADQUARTER")
+    @Transient
     private Boolean isHeadquarter;
 
     public SwiftCode(String swiftCode, String bankName, String ISO2, boolean isHeadquarter) {
@@ -48,5 +51,18 @@ public class SwiftCode {
         this.name = bankName;
         this.countryISO2 = ISO2;
         this.isHeadquarter = isHeadquarter;
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        SwiftCode swiftCode1 = (SwiftCode) o;
+        return id == swiftCode1.id && Objects.equals(countryISO2, swiftCode1.countryISO2) && Objects.equals(swiftCode, swiftCode1.swiftCode) && Objects.equals(codeType, swiftCode1.codeType) && Objects.equals(name, swiftCode1.name) && Objects.equals(address, swiftCode1.address) && Objects.equals(townName, swiftCode1.townName) && Objects.equals(countryName, swiftCode1.countryName) && Objects.equals(timeZone, swiftCode1.timeZone) && Objects.equals(isHeadquarter, swiftCode1.isHeadquarter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, countryISO2, swiftCode, codeType, name, address, townName, countryName, timeZone, isHeadquarter);
     }
 }

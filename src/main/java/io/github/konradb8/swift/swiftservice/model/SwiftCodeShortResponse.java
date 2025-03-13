@@ -18,12 +18,13 @@ public class SwiftCodeShortResponse {
     private String countryISO2;
     private String swiftCode;
     @JsonProperty("isHeadquarter")
-    private boolean headquarter;
+    private Boolean headquarter;
 
     public SwiftCodeShortResponse(SwiftCode swiftCode) {
         this.address = swiftCode.getAddress();
         this.bankName = swiftCode.getName();
         this.countryISO2 = swiftCode.getCountryISO2();
+        this.headquarter = swiftCode.getIsHeadquarter();
         this.swiftCode = swiftCode.getSwiftCode();
     }
 

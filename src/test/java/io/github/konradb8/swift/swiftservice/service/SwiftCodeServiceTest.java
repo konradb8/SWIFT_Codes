@@ -1,11 +1,10 @@
-package io.github.konradb8.swift.swiftservice.serviceTest;
+package io.github.konradb8.swift.swiftservice.service;
 
 import io.github.konradb8.swift.swiftservice.model.SwiftCode;
 import io.github.konradb8.swift.swiftservice.model.SwiftCodeRequest;
 import io.github.konradb8.swift.swiftservice.model.SwiftCodeResponse;
 import io.github.konradb8.swift.swiftservice.model.SwiftCodesByCountryResponse;
 import io.github.konradb8.swift.swiftservice.repository.SwiftCodeRepository;
-import io.github.konradb8.swift.swiftservice.service.SwiftCodeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -64,7 +63,7 @@ public class SwiftCodeServiceTest {
     }
 
     @Test
-    void FindByCountryCodeTest(){
+    void findByCountryCodeTest(){
         List<SwiftCode> swiftCodes = new ArrayList<>();
         swiftCodes.add(new SwiftCode("PL123456XXX", "Bank Polska", "PL", true));
         swiftCodes.add(new SwiftCode("PL654321AKS", "Bank Warszawa", "PL",false));
@@ -84,15 +83,13 @@ public class SwiftCodeServiceTest {
     }
 
     @Test
-    void AddSwiftCodeTest(){
+    void addSwiftCodeTest(){
         SwiftCodeRequest swiftCodeRequest = new SwiftCodeRequest();
         swiftCodeRequest.setSwiftCode("PL123456XXX");
         swiftCodeRequest.setBankName("Bank Polska");
         swiftCodeRequest.setCountryISO2("PL");
         swiftCodeRequest.setCountryName("Poland");
         swiftCodeRequest.setHeadquarter(true);
-
-        doReturn(true).when(service).isHeadquarter(swiftCodeRequest.getSwiftCode());
 
         SwiftCode swiftCode = new SwiftCode();
         swiftCode.setSwiftCode(swiftCodeRequest.getSwiftCode());
@@ -120,9 +117,8 @@ public class SwiftCodeServiceTest {
         assertTrue(capturedSwiftCode.getIsHeadquarter());
 
     }
-
     @Test
-    void DeleteSwiftCodeTest(){
+    void deleteSwiftCodeTest(){
 
         SwiftCode swiftCode = new SwiftCode();
         swiftCode.setSwiftCode("PL123456XXX");
@@ -135,4 +131,3 @@ public class SwiftCodeServiceTest {
         verify(repository, times(1)).delete(swiftCode);
     }
 }
-
