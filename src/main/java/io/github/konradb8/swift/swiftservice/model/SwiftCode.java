@@ -1,5 +1,6 @@
 package io.github.konradb8.swift.swiftservice.model;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,13 +14,10 @@ import java.util.Objects;
 @Table(name = "swift_codes")
 public class SwiftCode {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
     @Column(name = "COUNTRY ISO2 CODE")
     private String countryISO2;
 
+    @Id
     @Column(name = "SWIFT CODE")
     private String swiftCode;
 
@@ -56,11 +54,11 @@ public class SwiftCode {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         SwiftCode swiftCode1 = (SwiftCode) o;
-        return id == swiftCode1.id && Objects.equals(countryISO2, swiftCode1.countryISO2) && Objects.equals(swiftCode, swiftCode1.swiftCode) && Objects.equals(codeType, swiftCode1.codeType) && Objects.equals(name, swiftCode1.name) && Objects.equals(address, swiftCode1.address) && Objects.equals(townName, swiftCode1.townName) && Objects.equals(countryName, swiftCode1.countryName) && Objects.equals(timeZone, swiftCode1.timeZone) && Objects.equals(isHeadquarter, swiftCode1.isHeadquarter);
+        return Objects.equals(countryISO2, swiftCode1.countryISO2) && Objects.equals(swiftCode, swiftCode1.swiftCode) && Objects.equals(codeType, swiftCode1.codeType) && Objects.equals(name, swiftCode1.name) && Objects.equals(address, swiftCode1.address) && Objects.equals(townName, swiftCode1.townName) && Objects.equals(countryName, swiftCode1.countryName) && Objects.equals(timeZone, swiftCode1.timeZone) && Objects.equals(isHeadquarter, swiftCode1.isHeadquarter);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, countryISO2, swiftCode, codeType, name, address, townName, countryName, timeZone, isHeadquarter);
+        return Objects.hash(countryISO2, swiftCode, codeType, name, address, townName, countryName, timeZone, isHeadquarter);
     }
 }

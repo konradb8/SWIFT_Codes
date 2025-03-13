@@ -2,6 +2,7 @@ package io.github.konradb8.swift.swiftservice.service;
 
 import io.github.konradb8.swift.swiftservice.model.SwiftCode;
 import io.github.konradb8.swift.swiftservice.repository.SwiftCodeRepository;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.core.io.ClassPathResource;
@@ -20,6 +21,7 @@ class CSVImportServiceTest {
     @Mock
     private SwiftCodeRepository swiftCodeRepository = Mockito.mock(SwiftCodeRepository.class);
 
+    @Test
     public void testCSVImportServiceLoads() throws IOException {
         Resource fileResource = new ClassPathResource("csv-small.csv");
         assertNotNull(fileResource);
